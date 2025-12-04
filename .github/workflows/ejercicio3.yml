@@ -1,8 +1,10 @@
 name: Ejercicio 3
 
-on: [push]
+on:
+  push:
 
 jobs:
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -11,16 +13,17 @@ jobs:
 
   test:
     needs: lint
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - run: npm install
       - run: npm test
 
   build:
-    needs: test 
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +32,7 @@ jobs:
           echo "Build date: $(date)" > build-info.txt
           echo "Version: 1.0.0" >> build-info.txt
 
-     - uses: actions/upload-artifact@v4
-  with:
-    name: build-artifact
-    path: build-info.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: build-info.txt

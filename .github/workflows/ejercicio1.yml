@@ -6,7 +6,7 @@ on:
 
 jobs:
   hello:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
     steps:
       - name: Saludo
         run: echo "Hola, mi nombre es Fabian Moises Galeas"
